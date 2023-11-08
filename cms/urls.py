@@ -20,6 +20,9 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include("cmsapp.urls"))
+    path('',include("cmsapp.urls")),
+    path('',include("profiles.urls")),
+    
+    
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

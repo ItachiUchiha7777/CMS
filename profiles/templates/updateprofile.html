@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .container {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 50%;
+    height: auto;
+    padding: 30px 20px 20px 20px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+
+  .container h3 {
+    text-align: center;
+  }
+</style>
+<div class="container" id="container">
+  <h3><strong>Update Your Profile</strong></h3>
+  <form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+<script>
+  // Add Bootstrap classes to form elements
+const form = document.querySelector('form');
+const inputs = form.querySelectorAll('input, textarea');
+
+for (const input of inputs) {
+  if (input.type !== 'submit') {
+    input.classList.add('form-control');
+  }
+}
+
+const select = form.querySelector('select');
+select.classList.add('custom-select');
+
+// Handle "delete" button functionality
+const closeButton = document.getElementById('close-button');
+
+closeButton.addEventListener('click', function() {
+  const notification = closeButton.closest('.notification');
+  if (notification) {
+    notification.style.display = 'none';
+  }
+});
+
+// Handle profile picture checkbox
+const pictureCheckbox = document.getElementById('id_picture-clear');
+
+pictureCheckbox.addEventListener('change', function() {
+  const profilePictureInput = document.getElementById('id_picture');
+  const profilePictureContainer = document.querySelector('.profile-picture-container');
+  const profilePicture = document.querySelector('.profile-picture');
+
+  if (pictureCheckbox.checked) {
+    profilePicture.src = '';
+    profilePictureInput.value = '';
+    profilePictureContainer.classList.add('hidden');
+  } else {
+    profilePictureContainer.classList.remove('hidden');
+  }
+});
+
+</script>
+{% endblock %}

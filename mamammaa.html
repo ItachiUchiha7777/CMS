@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Input Data</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="First Name"><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Email"><br><br>
+
+    <label for="subscribe">Subscribe to newsletter:</label>
+    <input type="checkbox" id="subscribe" name="subscribe" value="yes"><br><br>
+
+    <label for="gender">Gender:</label>
+    <input type="radio" id="male" name="gender" value="male"> Male
+    <input type="radio" id="female" name="gender" value="female"> Female<br><br>
+
+    <label for="country">Country:</label>
+    <select id="country" name="country">
+      <option value="us">United States</option>
+      <option value="ca">Canada</option>
+      <option value="uk">United Kingdom</option>
+    </select><br><br>
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Enter your comments"></textarea><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="displayData"></div>
+
+  <script>
+    const form = document.getElementById("myForm");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+
+      // Create an object to store the form data
+      const formObject = {};
+
+      // Iterate through the FormData and populate the formObject
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      // Display the form data on the webpage
+      const displayDiv = document.getElementById("displayData");
+      displayDiv.innerHTML = "<h2>Form Data:</h2><pre>" + JSON.stringify(formObject, null, 10) + "</pre>";
+    });
+  </script>
+</body>
+</html>
